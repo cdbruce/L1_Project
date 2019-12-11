@@ -1,0 +1,63 @@
+id	name	L1denovo	L1Pol	L1HS	Control
+H2AFZ_signal	H2AFZ	L1denovo_H1-hESC_H2AFZ_signal.bed	L1Pol_H1-hESC_H2AFZ_signal.bed	L1HS_H1-hESC_H2AFZ_signal.bed	Control_H1-hESC_H2AFZ_signal.bed
+H3K27ac_signal	H3K27ac	L1denovo_H1-hESC_H3K27ac_signal.bed	L1Pol_H1-hESC_H3K27ac_signal.bed	L1HS_H1-hESC_H3K27ac_signal.bed	Control_H1-hESC_H3K27ac_signal.bed
+H4K20me1_signal	H4K20me1	L1denovo_H1-hESC_H4K20me1_signal.bed	L1Pol_H1-hESC_H4K20me1_signal.bed	L1HS_H1-hESC_H4K20me1_signal.bed	Control_H1-hESC_H4K20me1_signal.bed
+H3K36me3_signal	H3K36me3	L1denovo_H1-hESC_H3K36me3_signal.bed	L1Pol_H1-hESC_H3K36me3_signal.bed	L1HS_H1-hESC_H3K36me3_signal.bed	Control_H1-hESC_H3K36me3_signal.bed
+H3K4me1_signal	H3K4me1	L1denovo_H1-hESC_H3K4me1_signal.bed	L1Pol_H1-hESC_H3K4me1_signal.bed	L1HS_H1-hESC_H3K4me1_signal.bed	Control_H1-hESC_H3K4me1_signal.bed
+H3K4me2_signal	H3K4me2	L1denovo_H1-hESC_H3K4me2_signal.bed	L1Pol_H1-hESC_H3K4me2_signal.bed	L1HS_H1-hESC_H3K4me2_signal.bed	Control_H1-hESC_H3K4me2_signal.bed
+H3K4me3_signal	H3K4me3	L1denovo_H1-hESC_H3K4me3_signal.bed	L1Pol_H1-hESC_H3K4me3_signal.bed	L1HS_H1-hESC_H3K4me3_signal.bed	Control_H1-hESC_H3K4me3_signal.bed
+H3K79me2_signal	H3K79me2	L1denovo_H1-hESC_H3K79me2_signal.bed	L1Pol_H1-hESC_H3K79me2_signal.bed	L1HS_H1-hESC_H3K79me2_signal.bed	Control_H1-hESC_H3K79me2_signal.bed
+H3K9ac_signal	H3K9ac	L1denovo_H1-hESC_H3K9ac_signal.bed	L1Pol_H1-hESC_H3K9ac_signal.bed	L1HS_H1-hESC_H3K9ac_signal.bed	Control_H1-hESC_H3K9ac_signal.bed
+H3K9me3_signal	H3K9me3	L1denovo_H1-hESC_H3K9me3_signal.bed	L1Pol_H1-hESC_H3K9me3_signal.bed	L1HS_H1-hESC_H3K9me3_signal.bed	Control_H1-hESC_H3K9me3_signal.bed
+H3K27me3_signal	H3K27me3	L1denovo_H1-hESC_H3K27me3_signal.bed	L1Pol_H1-hESC_H3K27me3_signal.bed	L1HS_H1-hESC_H3K27me3_signal.bed	Control_H1-hESC_H3K27me3_signal.bed
+CTCF_signal	CTCF	L1denovo_ENCFF000AVN_signal.bed	L1Pol_ENCFF000AVN_signal.bed	L1HS_ENCFF000AVN_signal.bed	Control_ENCFF000AVN_signal.bed
+DNase_DGF	DNase digital genomic footprinting	1_1.bed	2_1.bed	3_1.bed	0_1.bed
+DNase_DHS	DNase hypersensitive sites	1_40.bed	2_40.bed	3_40.bed	0_40.bed
+DNase_DHS_signal	DNase hypersensitive sites	L1denovo_ENCFF316ZUB_signal.bed	L1Pol_ENCFF316ZUB_signal.bed	L1HS_ENCFF316ZUB_signal.bed	Control_ENCFF316ZUB_signal.bed
+RNA_PolII	RNA Pol2	1_2.bed	2_2.bed	3_2.bed	0_2.bed
+Quadruplex	G Quadruplexes	1_13.bed	2_13.bed	3_13.bed	0_13.bed
+A_Phased	A-phased repeats	1_3.bed	2_3.bed	3_3.bed	0_3.bed
+Direct_Repeats	Direct repeats	1_5.bed	2_5.bed	3_5.bed	0_5.bed
+Inverted_Repeats	Inverted repeats	1_7.bed	2_7.bed	3_7.bed	0_7.bed
+Mirror_Repeats	Mirror repeats	1_9.bed	2_9.bed	3_9.bed	0_9.bed
+Z_DNA	Z DNA motifs	1_16.bed	2_16.bed	3_16.bed	0_16.bed
+Most_Conserved	Most conserved element	1_11.bed	2_11.bed	3_11.bed	0_11.bed
+Exons	Exons	1_12.bed	2_12.bed	3_12.bed	0_12.bed
+Introns	Introns	1_17.bed	2_17.bed	3_17.bed	0_17.bed
+GC_Content	GC content	1_41.bed	2_41.bed	3_41.bed	0_41.bed
+AT_Content	AT content	1_42.bed	2_42.bed	3_42.bed	0_42.bed
+Mononucleotide	Mononucleotides	1_10.bed	2_10.bed	3_10.bed	0_10.bed
+Dinucleotide	Dinucleotides	1_4.bed	2_4.bed	3_4.bed	0_4.bed
+Trinucleotide	Trinucleotides	1_15.bed	2_15.bed	3_15.bed	0_15.bed
+Tetranucleotide	Tetranucleotides	1_14.bed	2_14.bed	3_14.bed	0_14.bed
+Morethan1_nuc	Microsatellites di- tri- tetra-nucleotide	1_24.bed	2_24.bed	3_24.bed	0_24.bed
+DNA_Transposons	DNA transposons	1_6.bed	2_6.bed	3_6.bed	0_6.bed
+SINE_Alu	Alu	1_18.bed	2_18.bed	3_18.bed	0_18.bed
+SINE_MIR	MIR	1_19.bed	2_19.bed	3_19.bed	0_19.bed
+LTR_Elements	LTR elements	1_8.bed	2_8.bed	3_8.bed	0_8.bed
+L1_Targets	L1 target motifs	1_46.bed	2_46.bed	3_46.bed	0_46.bed
+LINE_L2	L2	1_20.bed	2_20.bed	3_20.bed	0_20.bed
+LINE_L3	L3	1_21.bed	2_21.bed	3_21.bed	0_21.bed
+LINE_L2&L3	L2 and L3	1_23.bed	2_23.bed	3_23.bed	0_23.bed
+CpG_Islands	CpG islands	1_31.bed	2_31.bed	3_31.bed	0_31.bed
+CpG_Islands_Count	CpG islands counts	1_32.bed	2_32.bed	3_32.bed	0_32.bed
+5hMc	5-hydroxymethylcytosine	1_25.bed	2_25.bed	3_25.bed	0_25.bed
+Sperm_hypometh	Sperm hypomethylation	1_26.bed	2_26.bed	3_26.bed	0_26.bed
+Rep_origin	Replication origin	1_27.bed	2_27.bed	3_27.bed	0_27.bed
+Female_Recom_Hot	Female recombination hotspots	1_28.bed	2_28.bed	3_28.bed	0_28.bed
+Male_Recom_Hot	Male recombination hotspots	1_29.bed	2_29.bed	3_29.bed	0_29.bed
+Recombination_Hot	Sex-averaged recombination hotspots	1_30.bed	2_30.bed	3_30.bed	0_30.bed
+Exon_Expression	hESC exon expression	1_33.bed	2_33.bed	3_33.bed	0_33.bed
+Gene_Expression	hESC gene expression	1_34.bed	2_34.bed	3_34.bed	0_34.bed
+Tracript_Expression	hESC transcript expression	1_35.bed	2_35.bed	3_35.bed	0_35.bed
+Testis_Expression	Testis expression	1_36.bed	2_36.bed	3_36.bed	0_36.bed
+chh_meth	CHH Methylation	1_48.bed	2_48.bed	3_48.bed	0_48.bed
+chg_meth	CHG Methylation	1_49.bed	2_49.bed	3_49.bed	0_49.bed
+cpg_meth	CPG Methylation	1_50.bed	2_50.bed	3_50.bed	0_50.bed
+Dis_Telo	Distance to telomere	1_37.bed	2_37.bed	3_37.bed	0_37.bed
+Dis_Cent	Distance to centromere	1_38.bed	2_38.bed	3_38.bed	0_38.bed
+Rep_Timing	Replication timing	1_39.bed	2_39.bed	3_39.bed	0_39.bed
+Female_Recom_Rate	Female recombination rate	1_43.bed	2_43.bed	3_43.bed	0_43.bed
+Male_Recom_Rate	Male recombination rate	1_44.bed	2_44.bed	3_44.bed	0_44.bed
+Average_Recom_Rate	Averaged recombination rate	1_45.bed	2_45.bed	3_45.bed	0_45.bed
+Telomere_Hexamer	Telomere hexamer	1_47.bed	2_47.bed	3_47.bed	0_47.bed

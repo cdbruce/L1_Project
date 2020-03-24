@@ -1,0 +1,8 @@
+id	name	genome	file
+L1denovoFlasch	De novo L1 Flasch	hg19	Flasch_denovo_hESC_100k_no_gaps_no_blacklisted_method2.bed
+L1denovoSultana	De novo L1 Sultana	hg19	Sultana_denovo_Hela_100k_no_gaps_no_blacklisted_method2.bed
+L1denovo	De novo L1	hg19	L1denovo_100kb_no_gaps_no_blacklisted_method2.bed
+L1Pol	Polymorphic L1	hg19	L1Pol_100kb_no_gaps_no_blacklisted_method2.bed
+L1HS	Human specific L1	hg19	L1HS_100kb_no_gaps_no_blacklisted_method2.bed
+Control	Control	hg19	100k_Control_noHS_noPol_nodenovo_nodbRIP_7percent_L1cov.bed
+

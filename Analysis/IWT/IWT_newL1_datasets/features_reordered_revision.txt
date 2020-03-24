@@ -1,0 +1,1 @@
+DNase_DHS_signalCTCF_signalH2AFZ_signalH3K27ac_signalH4K20me1_signalH3K36me3_signalH3K4me1_signalH3K4me2_signalH3K4me3_signalH3K79me2_signalH3K9ac_signalH3K9me3_signalH3K27me3_signal

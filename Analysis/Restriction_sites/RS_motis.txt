@@ -1,0 +1,7 @@
+Msp I:
+5'-CCGG-3'
+3'-GGCC-5'
+
+Taq I
+5'-TCGA-3'
+3'-AGCT-5'

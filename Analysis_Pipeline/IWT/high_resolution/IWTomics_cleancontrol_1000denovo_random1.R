@@ -19,11 +19,7 @@ for (r in 1:5){
   assign(paste('pval_random_',r,sep=""),out)
 }
 
-
-
-
-
-
+#Plot IWT results 
 pdf('IWT_autosomes_smoothed_mean.pdf',width=7,height=10)
 plotTest(result_mean,col=c('red','blue','green','black'),
          scale_threshold=unlist(lapply(result_mean@length_features,function(feat) unique(unlist(feat)))),ask=FALSE)

@@ -9,7 +9,7 @@ library(nws)
 library(plyr)
 
 #################### test ####################
-#### selecting largest pvalues from 10 random results ####
+#### selecting median pvalues from 10 random results ####
 ##############################################
 
 
@@ -27,121 +27,15 @@ head(pval_random_1[[1]][[1]]$adjusted_pval_matrix)
 head(pval_random_2[[1]][[1]]$adjusted_pval_matrix)
 head(pval_random_10[[1]][[1]]$adjusted_pval_matrix)
 
-
-
-
-#####HOW to get median from matrix while keeping the structure: mcapply???????#####
-
+#####Get median from matrix while keeping the structure#####
 #X <- data.frame(matrix(rnorm(1e+07), ncol = 200))
 #mclapply(X, median)
-
 pval_random_max <- pval_random_1
 #i=1
 #j=1
 is(pval_random_max[[i]][[j]])
 head(pval_random_max[[i]][[j]])
 
-# ##Get max pvalues out of 10 randoms
-# for (i in 1:6){
-#   for (j in 1:45){
-#   pval_random_max[[i]][[j]]$adjusted_pval_matrix <- pmax(pval_random_1[[i]][[j]]$adjusted_pval_matrix,pval_random_2[[i]][[j]]$adjusted_pval_matrix,
-#                                                                     pval_random_3[[i]][[j]]$adjusted_pval_matrix,pval_random_4[[i]][[j]]$adjusted_pval_matrix,
-#                                                                     pval_random_5[[i]][[j]]$adjusted_pval_matrix,pval_random_6[[i]][[j]]$adjusted_pval_matrix,
-#                                                                     pval_random_7[[i]][[j]]$adjusted_pval_matrix,pval_random_8[[i]][[j]]$adjusted_pval_matrix,
-#                                                                     pval_random_9[[i]][[j]]$adjusted_pval_matrix,pval_random_10[[i]][[j]]$adjusted_pval_matrix)
-#   
-#   pval_random_max[[i]][[j]]$pval_matrix <- pmax(pval_random_1[[i]][[j]]$pval_matrix,pval_random_2[[i]][[j]]$pval_matrix,
-#                                                          pval_random_3[[i]][[j]]$pval_matrix,pval_random_4[[i]][[j]]$pval_matrix,
-#                                                          pval_random_5[[i]][[j]]$pval_matrix,pval_random_6[[i]][[j]]$pval_matrix,
-#                                                          pval_random_7[[i]][[j]]$pval_matrix,pval_random_8[[i]][[j]]$pval_matrix,
-#                                                          pval_random_9[[i]][[j]]$pval_matrix,pval_random_10[[i]][[j]]$pval_matrix)
-#     
-#   }
-# }
-# 
-# load('L1_autosomes_results_smoothed_mean_alldenovo.RData')
-# # head(t)
-# # dim(t)
-# result_mean@test$result<-pval_random_max
-# save(result_mean,file='L1_autosomes_results_smoothed_mean_alldennovo_max.RData')
-# 
-# load('L1_autosomes_results_smoothed_mean_alldennovo_max.RData')
-# setwd('max_plots/')
-# pdf('IWT_autosomes_smoothed_mean.pdf',width=7,height=10)
-# plotTest(result_mean,col=c('red','blue','green','black'),
-#          scale_threshold=unlist(lapply(result_mean@length_features,function(feat) unique(unlist(feat)))),ask=FALSE)
-# dev.off()
-# plotSummary(result_mean,groupby="test",only_significant=FALSE,xlab='kb',
-#             filenames=paste0("IWT_autosomes_smoothed_mean_summary_test_",c("denovo_control","pol_control","hs_control","denovo_pol","denovo_hs","pol_hs"),".pdf"),
-#             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-# plotSummary(result_mean,groupby="test",only_significant=FALSE,xlab='kb',scale_threshold=10,
-#             filenames=paste0("IWT_autosomes_smoothed_mean_summary_test_",c("denovo_control","pol_control","hs_control","denovo_pol","denovo_hs","pol_hs"),"_scale10.pdf"),
-#             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-# plotSummary(result_mean,groupby="feature",only_significant=FALSE,gaps_tests=3,xlab='kb',
-#             filenames=paste0("IWT_autosomes_smoothed_mean_summary_feature_",idFeatures(result_mean),".pdf"),
-#             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-# plotSummary(result_mean,groupby="feature",only_significant=FALSE,gaps_tests=3,xlab='kb',scale_threshold=10,
-#             filenames=paste0("IWT_autosomes_smoothed_mean_summary_feature_",idFeatures(result_mean),"_scale10.pdf"),
-#             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-# 
-# ##Get min pvalues out of 10 randoms
-# setwd("~/Desktop/cleanControl_pvalues/median/")
-# pval_random_min <- pval_random_1
-# #i=1
-# #j=1
-# is(pval_random_min[[i]][[j]])
-# head(pval_random_min[[i]][[j]])
-# 
-# for (i in 1:6){
-#   for (j in 1:45){
-#     pval_random_min[[i]][[j]]$adjusted_pval_matrix <- pmin(pval_random_1[[i]][[j]]$adjusted_pval_matrix,pval_random_2[[i]][[j]]$adjusted_pval_matrix,
-#                                                            pval_random_3[[i]][[j]]$adjusted_pval_matrix,pval_random_4[[i]][[j]]$adjusted_pval_matrix,
-#                                                            pval_random_5[[i]][[j]]$adjusted_pval_matrix,pval_random_6[[i]][[j]]$adjusted_pval_matrix,
-#                                                            pval_random_7[[i]][[j]]$adjusted_pval_matrix,pval_random_8[[i]][[j]]$adjusted_pval_matrix,
-#                                                            pval_random_9[[i]][[j]]$adjusted_pval_matrix,pval_random_10[[i]][[j]]$adjusted_pval_matrix)
-#     
-#     pval_random_min[[i]][[j]]$pval_matrix <- pmin(pval_random_1[[i]][[j]]$pval_matrix,pval_random_2[[i]][[j]]$pval_matrix,
-#                                                   pval_random_3[[i]][[j]]$pval_matrix,pval_random_4[[i]][[j]]$pval_matrix,
-#                                                   pval_random_5[[i]][[j]]$pval_matrix,pval_random_6[[i]][[j]]$pval_matrix,
-#                                                   pval_random_7[[i]][[j]]$pval_matrix,pval_random_8[[i]][[j]]$pval_matrix,
-#                                                   pval_random_9[[i]][[j]]$pval_matrix,pval_random_10[[i]][[j]]$pval_matrix)
-#     
-#   }
-# }
-# 
-# load('L1_autosomes_results_smoothed_mean_alldenovo.RData')
-# # head(t)
-# # dim(t)
-# result_mean@test$result<-pval_random_min
-# save(result_mean,file='L1_autosomes_results_smoothed_mean_alldennovo_min.RData')
-# 
-# load('L1_autosomes_results_smoothed_mean_alldennovo_min.RData')
-# setwd('min_plots/')
-# pdf('IWT_autosomes_smoothed_mean.pdf',width=7,height=10)
-# plotTest(result_mean,col=c('red','blue','green','black'),
-#          scale_threshold=unlist(lapply(result_mean@length_features,function(feat) unique(unlist(feat)))),ask=FALSE)
-# dev.off()
-# plotSummary(result_mean,groupby="test",only_significant=FALSE,xlab='kb',
-#             filenames=paste0("IWT_autosomes_smoothed_mean_summary_test_",c("denovo_control","pol_control","hs_control","denovo_pol","denovo_hs","pol_hs"),".pdf"),
-#             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-# plotSummary(result_mean,groupby="test",only_significant=FALSE,xlab='kb',scale_threshold=10,
-#             filenames=paste0("IWT_autosomes_smoothed_mean_summary_test_",c("denovo_control","pol_control","hs_control","denovo_pol","denovo_hs","pol_hs"),"_scale10.pdf"),
-#             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-# plotSummary(result_mean,groupby="feature",only_significant=FALSE,gaps_tests=3,xlab='kb',
-#             filenames=paste0("IWT_autosomes_smoothed_mean_summary_feature_",idFeatures(result_mean),".pdf"),
-#             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-# plotSummary(result_mean,groupby="feature",only_significant=FALSE,gaps_tests=3,xlab='kb',scale_threshold=10,
-#             filenames=paste0("IWT_autosomes_smoothed_mean_summary_feature_",idFeatures(result_mean),"_scale10.pdf"),
-#             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-# 
-
-
-
-
-
-
-
-  
 #Select the median out of 10 randoms 
 setwd("~/Desktop/IWT/cleanControl_pvalues/median/")
 pval_random_median <- pval_random_1
@@ -219,9 +113,7 @@ setwd('~/Desktop/IWT/cleanControl_pvalues/median/scale_selection_plots/')
 #             filenames=paste0("IWT_autosomes_smoothed_mean_summary_feature_",idFeatures(result_mean),"_scale10.pdf"),
 #             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
 
-
-####### Scale selection updated Feb28, 2018
-##################################
+####### Scale selection (updated Feb28, 2018) ##################################
 scale_threshold=list(test1=c(100,100,10,4,100,
                              16,16,100,4,100,
                              8,100,4,4,10,
@@ -483,6 +375,6 @@ plotTest(result_mean6,col=c('red','blue','green','black'),
 dev.off()
 
 # Save the data image with adjusted scales 
-#save.image("/Users/Bruce/Desktop/IWT/cleanControl_pvalues/median/scale_selection.RData")
+save.image("/Users/Bruce/Desktop/IWT/cleanControl_pvalues/median/scale_selection.RData")
 
 ## To write down which features at each test are LOCALIZED (look at both heatmap and boxplot)

@@ -23,11 +23,6 @@ write.table(control1000, file="~/Desktop/L1/files/control1000_A_unsorted.bed", s
 #sort by bedtools
 ##sortBed -i control1000_A_unsorted.bed > control1000_A.bed
 
-
-
-
-
-
 # files with datasets and features
 datasets=read.table("~/Desktop/L1/datasets.txt",sep="\t",header=TRUE,stringsAsFactors=FALSE)
 features_datasets=read.table("~/Desktop/L1/features_datasets.txt",sep="\t",header=TRUE,stringsAsFactors=FALSE)
@@ -41,7 +36,6 @@ regionsFeatures=IWTomicsData(datasets$file,features_datasets[,datasets$id],'cent
 save(regionsFeatures,file='L1_complete.RData')
 
 
-
 # select only autosomes
 load('L1_complete.RData')
 index=lapply(regionsFeatures@regions,function(region) seqnames(region)!='chrX')
@@ -53,29 +47,6 @@ validObject(regionsFeatures)
 # number of windows in each dataset
 lengthRegions(regionsFeatures)
 save(regionsFeatures,file='L1_autosomes.RData')
-
-# select only chrX
-load('L1_complete.RData')
-index=lapply(regionsFeatures@regions,function(region) seqnames(region)=='chrX')
-regionsFeatures@metadata$region_datasets$size=unlist(lapply(index,sum))
-regionsFeatures@regions=GRangesList(mapply(function(region,ind) region[ind,],regionsFeatures@regions,index,SIMPLIFY=FALSE))
-regionsFeatures@features=lapply(regionsFeatures@features,function(feature) mapply(function(feat,ind) feat[,which(ind)],feature,index,SIMPLIFY=FALSE))
-regionsFeatures@length_features=lapply(regionsFeatures@length_features,function(feature) mapply(function(feat,ind) feat[which(ind)],feature,index,SIMPLIFY=FALSE))
-validObject(regionsFeatures)
-# number of windows in each dataset
-lengthRegions(regionsFeatures)
-save(regionsFeatures,file='L1_chrX.RData')
-
-
-
-
-
-
-
-
-
-
-
 
 
 ######################
@@ -120,10 +91,12 @@ zero_count_tot
 many_zeros=names(which((zero_count_tot[,2]/zero_count_tot[,3]*100)<10))
 many_zeros
 #many_zeros=c("CpG_Islands","5hMc","Sperm_hypometh")
-#######################
-##### NOTE: before when we weren't selecting only controls that overlap <7% with non human-specific L1, 
-#####       we had more features with less than 10% non zeros:
-#####       many_zeros=c("Quadruplex","Exons","CpG_Islands","5hMc","Sperm_hypometh","Exon_Expression")
+######################################################################################################
+## NOTE: before when we weren't selecting only controls that overlap <7% with non human-specific L1,##
+## we had more features with less than 10% non zeros:
+## many_zeros=c("Quadruplex","Exons","CpG_Islands","5hMc","Sperm_hypometh","Exon_Expression")##
+######################################################################################################
+
 # smooth measurements... and keep 100 windows
 band=rep(1,length(many_zeros))
 names(band)=many_zeros
@@ -155,8 +128,6 @@ zero_count_tot
 save(regionsFeatures,band,file='L1_autosomes_zero_fixed.RData')
 
 
-
-
 ##################################################PLOT 
 load('L1_autosomes_zero_fixed.RData')
 # plot
@@ -183,11 +154,7 @@ plot(regionsFeatures,type='boxplot',id_regions_subset=c('Control','L1HS'),
 dev.off()
 
 
-
-###########
-
 index=sort(sample(regionsFeatures_smoothed@metadata$region_datasets['L1denovo','size'],1000))
-
 
 # include strand information and annotations
 # (reverse the 100-kb region measurements for minus strand)
@@ -260,15 +227,6 @@ plot(regionsFeatures,type='boxplot',id_regions_subset=c('Control','L1HS'),
      col=c('black','green'),xlab='kb',ask=FALSE)
 dev.off()
 
-
-
-
-
-
-
-
-
-
 # smooth everything but the features that were already smoothed because they had too many zeros
 load('L1_autosomes_zero_fixed_with_strand.RData')
 already_smoothed=c("CpG_Islands","5hMc","Sperm_hypometh")
@@ -304,13 +262,9 @@ plot(regionsFeatures_smoothed,type='boxplot',id_regions_subset=c('Control','L1HS
 dev.off()
 
 
-
-
-
-
-###################
-##### DE NOVO #####
-###################
+#############################
+##### DE NOVO hotspot########
+#############################
 ##### no overlaps vs 1 overlap vs 2 overlaps vs >2 overlaps
 load('L1_autosomes_zero_fixed_with_strand_smoothed.RData')
 overlaps=regionsFeatures_smoothed@regions$L1denovo$overlap_same
@@ -341,8 +295,6 @@ regionsFeatures_smoothed@length_features=mapply(function(old,new) c(old,new),reg
 validObject(regionsFeatures_smoothed)
 save(regionsFeatures_smoothed,file='L1_autosomes_zero_fixed_with_strand_smoothed_denovo_overlaps.RData')
 
-
-
 load('L1_autosomes_zero_fixed_with_strand_smoothed_denovo_overlaps.RData')
 # plot
 pdf('curves_autosomes_with_strand_smoothed_denovo_overlaps.pdf',width=10,height=8)
@@ -355,313 +307,10 @@ plot(regionsFeatures_smoothed,type='boxplot',id_regions_subset=c('Control','L1de
      col=c('black','goldenrod1','tan1','sienna1','firebrick3'),xlab='kb',ask=FALSE)
 dev.off()
 
+################################## 
+##### DE NOVO DESERT REGIONS #####
+################################## 
 
-
-
-
-
-
-
-
-
-#######################
-##### POLYMORPHIC #####
-#######################
-##### no overlaps vs 1-2 overlaps
-load('L1_autosomes_zero_fixed_with_strand_smoothed.RData')
-overlaps=regionsFeatures_smoothed@regions$L1Pol$overlap_same
-overlaps[overlaps>=1]='>0'
-overlaps=factor(overlaps,levels=c('0','>0'))
-
-regionsFeatures_smoothed=regionsFeatures_smoothed[c('L1Pol','Control'),]
-new_ids=paste0('L1Pol',c('0','>0'))
-reg=regionsFeatures_smoothed@regions$L1Pol
-feat=lapply(regionsFeatures_smoothed@features,function(feature) list(L1Pol=feature$L1Pol))
-len=lapply(regionsFeatures_smoothed@length_features,function(feature) list(L1Pol=feature$L1Pol))
-index=lapply(c('0','>0'),function(group) which(overlaps==group))
-names(index)=new_ids
-size_new=unlist(lapply(index,length))
-feat_new=lapply(feat,function(feat) lapply(index,function(index) as.matrix(feat$L1Pol[,index])))
-reg_new=lapply(index,function(index) reg[index])
-len_new=lapply(len,function(len) lapply(index,function(index) len$L1Pol[index]))
-reg_datasets_new=as.data.frame(matrix(regionsFeatures_smoothed@metadata$region_datasets['L1Pol',],nrow=length(index),ncol=3,byrow=TRUE),row.names=new_ids)
-names(reg_datasets_new)=names(regionsFeatures_smoothed@metadata$region_datasets)
-reg_datasets_new$name=paste0(reg_datasets_new$name,' - ',c('0','>0'),' overlaps')
-reg_datasets_new$size=size_new
-regionsFeatures_smoothed@metadata$region_datasets=rbind(regionsFeatures_smoothed@metadata$region_datasets,reg_datasets_new)
-regionsFeatures_smoothed@regions=c(regionsFeatures_smoothed@regions,GRangesList(reg_new))
-regionsFeatures_smoothed@metadata$feature_datasets=regionsFeatures_smoothed@metadata$feature_datasets[,c('name',paste0('file_',c(c('L1Pol','Control'),rep('L1Pol',length(index)))),'resolution')]
-names(regionsFeatures_smoothed@metadata$feature_datasets)=c('name',paste0('file_',c('L1Pol','Control',new_ids)),'resolution')
-regionsFeatures_smoothed@features=mapply(function(old,new) c(old,new),regionsFeatures_smoothed@features,feat_new,SIMPLIFY=FALSE)
-regionsFeatures_smoothed@length_features=mapply(function(old,new) c(old,new),regionsFeatures_smoothed@length_features,len_new,SIMPLIFY=FALSE)
-validObject(regionsFeatures_smoothed)
-save(regionsFeatures_smoothed,file='L1_autosomes_zero_fixed_with_strand_smoothed_Pol_overlaps.RData')
-
-
-
-load('L1_autosomes_zero_fixed_with_strand_smoothed_Pol_overlaps.RData')
-# plot
-pdf('curves_autosomes_with_strand_smoothed_pol_overlaps.pdf',width=10,height=8)
-plot(regionsFeatures_smoothed,type='curves',id_regions_subset=c('Control','L1Pol0','L1Pol>0'),
-     col=c('black','deepskyblue','dodgerblue2'),xlab='kb',ask=FALSE)
-dev.off()
-
-pdf('boxplot_autosomes_with_strand_smoothed_pol_overlaps.pdf',width=10,height=7)
-plot(regionsFeatures_smoothed,type='boxplot',id_regions_subset=c('Control','L1Pol0','L1Pol>0'),
-     col=c('black','deepskyblue','dodgerblue2'),xlab='kb',ask=FALSE)
-dev.off()
-
-
-
-
-
-
-
-
-
-##########################
-##### HUMAN SPECIFIC #####
-##########################
-##### no overlaps vs 1-2 overlaps
-load('L1_autosomes_zero_fixed_with_strand_smoothed.RData')
-overlaps=regionsFeatures_smoothed@regions$L1HS$overlap_same
-overlaps[overlaps>=1]='>0'
-overlaps=factor(overlaps,levels=c('0','>0'))
-
-regionsFeatures_smoothed=regionsFeatures_smoothed[c('L1HS','Control'),]
-new_ids=paste0('L1HS',c('0','>0'))
-reg=regionsFeatures_smoothed@regions$L1HS
-feat=lapply(regionsFeatures_smoothed@features,function(feature) list(L1HS=feature$L1HS))
-len=lapply(regionsFeatures_smoothed@length_features,function(feature) list(L1HS=feature$L1HS))
-index=lapply(c('0','>0'),function(group) which(overlaps==group))
-names(index)=new_ids
-size_new=unlist(lapply(index,length))
-feat_new=lapply(feat,function(feat) lapply(index,function(index) as.matrix(feat$L1HS[,index])))
-reg_new=lapply(index,function(index) reg[index])
-len_new=lapply(len,function(len) lapply(index,function(index) len$L1HS[index]))
-reg_datasets_new=as.data.frame(matrix(regionsFeatures_smoothed@metadata$region_datasets['L1HS',],nrow=length(index),ncol=3,byrow=TRUE),row.names=new_ids)
-names(reg_datasets_new)=names(regionsFeatures_smoothed@metadata$region_datasets)
-reg_datasets_new$name=paste0(reg_datasets_new$name,' - ',c('0','>0'),' overlaps')
-reg_datasets_new$size=size_new
-regionsFeatures_smoothed@metadata$region_datasets=rbind(regionsFeatures_smoothed@metadata$region_datasets,reg_datasets_new)
-regionsFeatures_smoothed@regions=c(regionsFeatures_smoothed@regions,GRangesList(reg_new))
-regionsFeatures_smoothed@metadata$feature_datasets=regionsFeatures_smoothed@metadata$feature_datasets[,c('name',paste0('file_',c(c('L1HS','Control'),rep('L1HS',length(index)))),'resolution')]
-names(regionsFeatures_smoothed@metadata$feature_datasets)=c('name',paste0('file_',c('L1HS','Control',new_ids)),'resolution')
-regionsFeatures_smoothed@features=mapply(function(old,new) c(old,new),regionsFeatures_smoothed@features,feat_new,SIMPLIFY=FALSE)
-regionsFeatures_smoothed@length_features=mapply(function(old,new) c(old,new),regionsFeatures_smoothed@length_features,len_new,SIMPLIFY=FALSE)
-validObject(regionsFeatures_smoothed)
-save(regionsFeatures_smoothed,file='L1_autosomes_zero_fixed_with_strand_smoothed_HS_overlaps.RData')
-
-
-
-load('L1_autosomes_zero_fixed_with_strand_smoothed_HS_overlaps.RData')
-# plot
-pdf('curves_autosomes_with_strand_smoothed_hs_overlaps.pdf',width=10,height=8)
-plot(regionsFeatures_smoothed,type='curves',id_regions_subset=c('Control','L1HS0','L1HS>0'),
-     col=c('black','springgreen3','springgreen4'),xlab='kb',ask=FALSE)
-dev.off()
-
-pdf('boxplot_autosomes_with_strand_smoothed_hs_overlaps.pdf',width=10,height=7)
-plot(regionsFeatures_smoothed,type='boxplot',id_regions_subset=c('Control','L1HS0','L1HS>0'),
-     col=c('black','springgreen3','springgreen4'),xlab='kb',ask=FALSE)
-dev.off()
-
-
-
-
-
-
-
-
-
-
-
-###################
-##### DE NOVO #####
-###################
-##### co-localization with L1 of different type
-load('L1_autosomes_zero_fixed_with_strand_smoothed.RData')
-overlaps=regionsFeatures_smoothed@regions$L1denovo$overlap_other
-overlaps=factor(overlaps,levels=c('no','pol','hs','both'))
-
-regionsFeatures_smoothed=regionsFeatures_smoothed[c('L1denovo','Control'),]
-new_ids=paste0('L1denovo',c('_no','_pol','_hs','_both'))
-reg=regionsFeatures_smoothed@regions$L1denovo
-feat=lapply(regionsFeatures_smoothed@features,function(feature) list(L1denovo=feature$L1denovo))
-len=lapply(regionsFeatures_smoothed@length_features,function(feature) list(L1denovo=feature$L1denovo))
-index=lapply(c('no','pol','hs','both'),function(group) which(overlaps==group))
-names(index)=new_ids
-size_new=unlist(lapply(index,length))
-feat_new=lapply(feat,function(feat) lapply(index,function(index) as.matrix(feat$L1denovo[,index])))
-reg_new=lapply(index,function(index) reg[index])
-len_new=lapply(len,function(len) lapply(index,function(index) len$L1denovo[index]))
-reg_datasets_new=as.data.frame(matrix(regionsFeatures_smoothed@metadata$region_datasets['L1denovo',],nrow=length(index),ncol=3,byrow=TRUE),row.names=new_ids)
-names(reg_datasets_new)=names(regionsFeatures_smoothed@metadata$region_datasets)
-reg_datasets_new$name=c('De novo only','De novo - polymorphic','De novo - human specific','All')
-reg_datasets_new$size=size_new
-regionsFeatures_smoothed@metadata$region_datasets=rbind(regionsFeatures_smoothed@metadata$region_datasets,reg_datasets_new)
-regionsFeatures_smoothed@regions=c(regionsFeatures_smoothed@regions,GRangesList(reg_new))
-regionsFeatures_smoothed@metadata$feature_datasets=regionsFeatures_smoothed@metadata$feature_datasets[,c('name',paste0('file_',c(c('L1denovo','Control'),rep('L1denovo',length(index)))),'resolution')]
-names(regionsFeatures_smoothed@metadata$feature_datasets)=c('name',paste0('file_',c('L1denovo','Control',new_ids)),'resolution')
-regionsFeatures_smoothed@features=mapply(function(old,new) c(old,new),regionsFeatures_smoothed@features,feat_new,SIMPLIFY=FALSE)
-regionsFeatures_smoothed@length_features=mapply(function(old,new) c(old,new),regionsFeatures_smoothed@length_features,len_new,SIMPLIFY=FALSE)
-validObject(regionsFeatures_smoothed)
-save(regionsFeatures_smoothed,file='L1_autosomes_zero_fixed_with_strand_smoothed_denovo_overlaps_other.RData')
-
-
-
-load('L1_autosomes_zero_fixed_with_strand_smoothed_denovo_overlaps_other.RData')
-# plot
-pdf('curves_autosomes_with_strand_smoothed_denovo_overlaps_other.pdf',width=10,height=8)
-plot(regionsFeatures_smoothed,type='curves',id_regions_subset=c('Control','L1denovo_no','L1denovo_pol','L1denovo_hs'),
-     col=c(rgb(0,0,0,1),rgb(1,0,0,1),rgb(1,0,1,1),rgb(1,0.6,0.3,1)),xlab='kb',ask=FALSE)
-dev.off()
-
-pdf('boxplot_autosomes_with_strand_smoothed_denovo_overlaps_other.pdf',width=10,height=7)
-plot(regionsFeatures_smoothed,type='boxplot',id_regions_subset=c('Control','L1denovo_no','L1denovo_pol','L1denovo_hs'),
-     col=c(rgb(0,0,0,1),rgb(1,0,0,1),rgb(1,0,1,1),rgb(1,0.6,0.3,1)),xlab='kb',ask=FALSE)
-dev.off()
-
-
-
-
-
-
-
-
-
-
-
-
-
-#######################
-##### POLYMORPHIC #####
-#######################
-##### co-localization with L1 of different type
-load('L1_autosomes_zero_fixed_with_strand_smoothed.RData')
-overlaps=regionsFeatures_smoothed@regions$L1Pol$overlap_other
-overlaps=factor(overlaps,levels=c('no','denovo','hs','both'))
-
-regionsFeatures_smoothed=regionsFeatures_smoothed[c('L1Pol','Control'),]
-new_ids=paste0('L1Pol',c('_no','_denovo','_hs','_both'))
-reg=regionsFeatures_smoothed@regions$L1Pol
-feat=lapply(regionsFeatures_smoothed@features,function(feature) list(L1Pol=feature$L1Pol))
-len=lapply(regionsFeatures_smoothed@length_features,function(feature) list(L1Pol=feature$L1Pol))
-index=lapply(c('no','denovo','hs','both'),function(group) which(overlaps==group))
-names(index)=new_ids
-size_new=unlist(lapply(index,length))
-feat_new=lapply(feat,function(feat) lapply(index,function(index) as.matrix(feat$L1Pol[,index])))
-reg_new=lapply(index,function(index) reg[index])
-len_new=lapply(len,function(len) lapply(index,function(index) len$L1Pol[index]))
-reg_datasets_new=as.data.frame(matrix(regionsFeatures_smoothed@metadata$region_datasets['L1Pol',],nrow=length(index),ncol=3,byrow=TRUE),row.names=new_ids)
-names(reg_datasets_new)=names(regionsFeatures_smoothed@metadata$region_datasets)
-reg_datasets_new$name=c('Polymorphic only','Polymorphic - de novo','Polymorphic - human specific','All')
-reg_datasets_new$size=size_new
-regionsFeatures_smoothed@metadata$region_datasets=rbind(regionsFeatures_smoothed@metadata$region_datasets,reg_datasets_new)
-regionsFeatures_smoothed@regions=c(regionsFeatures_smoothed@regions,GRangesList(reg_new))
-regionsFeatures_smoothed@metadata$feature_datasets=regionsFeatures_smoothed@metadata$feature_datasets[,c('name',paste0('file_',c(c('L1Pol','Control'),rep('L1Pol',length(index)))),'resolution')]
-names(regionsFeatures_smoothed@metadata$feature_datasets)=c('name',paste0('file_',c('L1Pol','Control',new_ids)),'resolution')
-regionsFeatures_smoothed@features=mapply(function(old,new) c(old,new),regionsFeatures_smoothed@features,feat_new,SIMPLIFY=FALSE)
-regionsFeatures_smoothed@length_features=mapply(function(old,new) c(old,new),regionsFeatures_smoothed@length_features,len_new,SIMPLIFY=FALSE)
-validObject(regionsFeatures_smoothed)
-save(regionsFeatures_smoothed,file='L1_autosomes_zero_fixed_with_strand_smoothed_pol_overlaps_other.RData')
-
-
-
-load('L1_autosomes_zero_fixed_with_strand_smoothed_pol_overlaps_other.RData')
-# plot
-pdf('curves_with_strand_smoothed_pol_overlaps_other.pdf',width=10,height=8)
-plot(regionsFeatures_smoothed,type='curves',id_regions_subset=c('Control','L1Pol_no','L1Pol_denovo'),
-     col=c(rgb(0,0,0,1),rgb(0,0,1,1),rgb(1,0,1,1)),xlab='kb',ask=FALSE)
-dev.off()
-
-pdf('boxplot_with_strand_smoothed_pol_overlaps_other.pdf',width=10,height=7)
-plot(regionsFeatures_smoothed,type='boxplot',id_regions_subset=c('Control','L1Pol_no','L1Pol_denovo'),
-     col=c(rgb(0,0,0,1),rgb(0,0,1,1),rgb(1,0,1,1)),xlab='kb',ask=FALSE)
-dev.off()
-
-
-
-
-
-
-
-
-
-
-
-
-##########################
-##### HUMAN SPECIFIC #####
-##########################
-##### co-localization with L1 of different type
-load('L1_autosomes_zero_fixed_with_strand_smoothed.RData')
-overlaps=regionsFeatures_smoothed@regions$L1HS$overlap_other
-overlaps=factor(overlaps,levels=c('no','denovo','pol','both'))
-
-regionsFeatures_smoothed=regionsFeatures_smoothed[c('L1HS','Control'),]
-new_ids=paste0('L1HS',c('_no','_denovo','_pol','_both'))
-reg=regionsFeatures_smoothed@regions$L1HS
-feat=lapply(regionsFeatures_smoothed@features,function(feature) list(L1HS=feature$L1HS))
-len=lapply(regionsFeatures_smoothed@length_features,function(feature) list(L1HS=feature$L1HS))
-index=lapply(c('no','denovo','pol','both'),function(group) which(overlaps==group))
-names(index)=new_ids
-size_new=unlist(lapply(index,length))
-feat_new=lapply(feat,function(feat) lapply(index,function(index) as.matrix(feat$L1HS[,index])))
-reg_new=lapply(index,function(index) reg[index])
-len_new=lapply(len,function(len) lapply(index,function(index) len$L1HS[index]))
-reg_datasets_new=as.data.frame(matrix(regionsFeatures_smoothed@metadata$region_datasets['L1HS',],nrow=length(index),ncol=3,byrow=TRUE),row.names=new_ids)
-names(reg_datasets_new)=names(regionsFeatures_smoothed@metadata$region_datasets)
-reg_datasets_new$name=c('Human specific only','Human specific - de novo','Human specific - polymorphic','All')
-reg_datasets_new$size=size_new
-regionsFeatures_smoothed@metadata$region_datasets=rbind(regionsFeatures_smoothed@metadata$region_datasets,reg_datasets_new)
-regionsFeatures_smoothed@regions=c(regionsFeatures_smoothed@regions,GRangesList(reg_new))
-regionsFeatures_smoothed@metadata$feature_datasets=regionsFeatures_smoothed@metadata$feature_datasets[,c('name',paste0('file_',c(c('L1HS','Control'),rep('L1HS',length(index)))),'resolution')]
-names(regionsFeatures_smoothed@metadata$feature_datasets)=c('name',paste0('file_',c('L1HS','Control',new_ids)),'resolution')
-regionsFeatures_smoothed@features=mapply(function(old,new) c(old,new),regionsFeatures_smoothed@features,feat_new,SIMPLIFY=FALSE)
-regionsFeatures_smoothed@length_features=mapply(function(old,new) c(old,new),regionsFeatures_smoothed@length_features,len_new,SIMPLIFY=FALSE)
-validObject(regionsFeatures_smoothed)
-save(regionsFeatures_smoothed,file='L1_autosomes_zero_fixed_with_strand_smoothed_hs_overlaps_other.RData')
-
-
-
-load('L1_autosomes_zero_fixed_with_strand_smoothed_hs_overlaps_other.RData')
-# plot
-pdf('curves_with_strand_smoothed_hs_overlaps_other.pdf',width=10,height=8)
-plot(regionsFeatures_smoothed,type='curves',id_regions_subset=c('Control','L1HS_no','L1HS_denovo'),
-     col=c(rgb(0,0,0,1),rgb(0,1,0,1),rgb(1,0.6,0.3,1)),xlab='kb',ask=FALSE)
-dev.off()
-
-pdf('boxplot_autosomes_with_strand_smoothed_hs_overlaps_other.pdf',width=10,height=7)
-plot(regionsFeatures_smoothed,type='boxplot',id_regions_subset=c('Control','L1HS_no','L1HS_denovo'),
-     col=c(rgb(0,0,0,1),rgb(0,1,0,1),rgb(1,0.6,0.3,1)),xlab='kb',ask=FALSE)
-dev.off()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-###################
-##### DE NOVO #####
-###################
-##### DESERT REGIONS
 load('L1_autosomes_zero_fixed_with_strand_smoothed_denovo_overlaps.RData')
 desert=GRanges(Rle(c('chr6','chr3')),
                IRanges(c(27861519,162764896),c(33488776,167092790)))
@@ -705,45 +354,6 @@ pdf('boxplot_autosomes_with_strand_smoothed_denovo_desert.pdf',width=10,height=7
 plot(regionsFeatures_smoothed,type='boxplot',id_regions_subset=c('Control_no_desert','L1denovo0','L1denovo1','L1denovo2','L1denovo>2','Desert'),
      col=c('black','goldenrod1','tan1','sienna1','firebrick3','gray'),xlab='kb',ask=FALSE)
 dev.off()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #################### test ####################
 #### all regions, zero fixed, with strand ####
@@ -874,9 +484,6 @@ plotSummary(result_multi_quantile,groupby="feature",only_significant=FALSE,gaps_
             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
 
 
-
-
-
 #################### test ####################
 #### denovo different number of overlaps  ####
 ##############################################
@@ -906,92 +513,4 @@ plotSummary(result_mean,groupby="test",only_significant=FALSE,xlab='kb',test=1:4
 plotSummary(result_mean,groupby="feature",only_significant=FALSE,gaps_tests=c(4,7),xlab='kb',
             filenames=paste0("IWT_autosomes_smoothed_denovo_overlaps_mean_summary_feature_",idFeatures(result_mean),".pdf"),
             align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-
-
-
-
-
-
-
-
-
-#################### test ####################
-####   regions with only one type of L1   ####
-####        zero fixed, with strand       ####
-##############################################
-load('L1_autosomes_zero_fixed_with_strand_smoothed.RData')
-no_overlaps=lapply(regionsFeatures_smoothed@regions[1:3],function(regions) regions$overlap_other=='no')
-regionsFeatures_smoothed@regions[1:3]=GRangesList(mapply(function(regions,no) regions[no],regionsFeatures_smoothed@regions[1:3],no_overlaps,SIMPLIFY=FALSE))
-regionsFeatures_smoothed@features=lapply(regionsFeatures_smoothed@features,
-                                         function(feature){
-                                           feature[1:3]=mapply(function(feat,no) feat[,no],feature[1:3],no_overlaps,SIMPLIFY=FALSE)
-                                           return(feature)
-                                         })
-regionsFeatures_smoothed@length_features=lapply(regionsFeatures_smoothed@length_features,
-                                                function(feature){
-                                                  feature[1:3]=mapply(function(feat,no) feat[no],feature[1:3],no_overlaps,SIMPLIFY=FALSE)
-                                                  return(feature)
-                                                })
-validObject(regionsFeatures_smoothed)
-save(regionsFeatures_smoothed,file='L1_autosomes_zero_fixed_with_strand_smoothed_only_one_L1.RData')
-
-# plot
-pdf('curves_autosomes_with_strand_smoothed_only_one_L1.pdf',width=10,height=8)
-plot(regionsFeatures_smoothed,type='curves',id_regions_subset=c('Control','L1denovo','L1Pol','L1HS'),
-     col=c('black','red','blue','green'),xlab='kb',ask=FALSE)
-dev.off()
-
-pdf('means_autosomes_with_strand_smoothed_only_one_L1.pdf',width=10,height=8)
-plot_only_means(regionsFeatures_smoothed,id_regions_subset=c('Control','L1denovo','L1Pol','L1HS'),
-                col=c('black','red','blue','green'),xlab='kb',ask=FALSE)
-dev.off()
-pdf('means_autosomes_with_strand_smoothed_only_one_L1_no_zero.pdf',width=10,height=8)
-plot_only_means(regionsFeatures_smoothed,id_regions_subset=c('Control','L1denovo','L1Pol','L1HS'),include_zero=FALSE,
-                col=c('black','red','blue','green'),xlab='kb',ask=FALSE)
-dev.off()
-
-pdf('boxplot_autosomes_with_strand_smoothed_only_one_L1.pdf',width=10,height=7)
-plot(regionsFeatures_smoothed,type='boxplot',id_regions_subset=c('Control','L1denovo','L1Pol','L1HS'),
-     col=c('black','red','blue','green'),xlab='kb',ask=FALSE)
-dev.off()
-pdf('boxplot_autosomes_with_strand_smoothed_only_one_L1_denovo.pdf',width=10,height=7)
-plot(regionsFeatures_smoothed,type='boxplot',id_regions_subset=c('Control','L1denovo'),
-     col=c('black','red'),xlab='kb',ask=FALSE)
-dev.off()
-pdf('boxplot_autosomes_with_strand_smoothed_only_one_L1_pol.pdf',width=10,height=7)
-plot(regionsFeatures_smoothed,type='boxplot',id_regions_subset=c('Control','L1Pol'),
-     col=c('black','blue'),xlab='kb',ask=FALSE)
-dev.off()
-pdf('boxplot_autosomes_with_strand_smoothed_only_one_L1_hs.pdf',width=10,height=7)
-plot(regionsFeatures_smoothed,type='boxplot',id_regions_subset=c('Control','L1HS'),
-     col=c('black','green'),xlab='kb',ask=FALSE)
-dev.off()
-
-
-# test
-load('L1_autosomes_zero_fixed_with_strand_smoothed_only_one_L1.RData')
-result_mean=IWTomicsTest(regionsFeatures_smoothed,
-                         id_region1=c("L1denovo","L1Pol","L1HS","L1denovo","L1denovo","L1Pol"),
-                         id_region2=c("Control","Control","Control","L1Pol","L1HS","L1HS"),
-                         statistics='mean',B=10000)
-save(result_mean,file='L1_autosomes_results_smoothed_only_one_L1_mean.RData')
-load('L1_autosomes_results_smoothed_only_one_L1_mean.RData')
-pdf('IWT_autosomes_smoothed_only_one_L1_mean.pdf',width=7,height=10)
-plotTest(result_mean,col=c('red','blue','green','black'),
-         scale_threshold=unlist(lapply(result_mean@length_features,function(feat) unique(unlist(feat)))),ask=FALSE)
-dev.off()
-plotSummary(result_mean,groupby="test",only_significant=FALSE,xlab='kb',
-            filenames=paste0("IWT_autosomes_smoothed_only_one_L1_mean_summary_test_",c("denovo_control","pol_control","hs_control","denovo_pol","denovo_hs","pol_hs"),".pdf"),
-            align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-plotSummary(result_mean,groupby="feature",only_significant=FALSE,gaps_tests=3,xlab='kb',
-            filenames=paste0("IWT_autosomes_smoothed_only_one_L1_mean_summary_feature_",idFeatures(result_mean),".pdf"),
-            align_lab="Integration site",ask=FALSE,cellwidth=10,cellheight=15)
-
-
-
-
-
-
-
-
 

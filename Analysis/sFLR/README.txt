@@ -1,8 +1,13 @@
-There are 10 folders (random 1-10) and 4 Rscript files:
+There are 4 Rscript files and 2 sub-folders:
+
 transformation_all_dataset.R
 func_log_regression_individual.R
 glm_scalar_no_lowFeatures.R
 glm_lowFeatures.R
+
+Sub-folders:
+- select_random_samples
+- random1
 
 transformation_all_dataset: R pipeline to transform all the predictors before performing any scalar/functional regression analysis. Transformation was performed for high-resolution (both functional&scalar) predictors, and low-resolution features separately as two files, generating two output files: “L1_transformed_random_r” (r=1:10) and “L1_lowFeatures_transformed_randomr” (r=1:10).
 
@@ -12,8 +17,12 @@ glm_scalar_no_lowFeatures: R pipeline of individual logistic regressions on scal
 
 glm_lowFeatures.R: R pipeline of individual logistic regressions on the 7 low-resolution features, using the transformed data “L1_lowFeatures_transformed_randomr” (r=1:10) as the input. Generally it is similar with the above pipeline for scalar predictors.
 
+In the subfolder "select_random_samples", there are 1 scripts and 1 RData, they are:
+1. selecting_random_sample.R: R scripts for selecting one out of 10 random samples (random 1 was selected)
+2. Select_random1.RData: RData containing selected random sample 1
 
-In each folder (taking random1 as an example), there are 4 RData and 18 tables, they are:
+
+In the subfolder "random1", there are 4 RData and 18 tables, they are:
 1.’L1_autosomes_results_smoothed_mean_1’: random sample generated based on de novo L1s, pre-transformation variables can be found in “result_mean” after loading the data.
 
 2.’L1_transformed_random_1.RData’: transformed variables for random sample 1, post-transformation variables can be found in “result_mean” after loading the data.

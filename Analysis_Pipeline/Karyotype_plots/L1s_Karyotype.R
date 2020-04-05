@@ -77,12 +77,12 @@ dev.off()
 pdf('L1_ALL.pdf',width=15, height=13)
 pp <- getDefaultPlotParams(plot.type=1)
 pp$leftmargin <- 0.1
-pp$data1height <- 25
+pp$data1height <- 60
 kp<-plotKaryotype(genome="hg19", main="Genome-wide distribution of all L1s in the study",plot.type=1, plot.params = pp, cex=1.6) ## Set genome assembly
 #kpPlotRegions(kp, gains,col="red",avoid.overlapping=FALSE ) ## Choose color
 getCytobandColors(color.table=NULL, color.schema=c("only.centromeres"))
-kpPlotRegions(kp, gains_denovo,col="red") ## Choose color
-kpPlotRegions(kp, gains_pol, col="blue") ## Choose color 
-kpPlotRegions(kp, gains_hs, col="green") ## Choose color 
+kpPlotRegions(kp, r0 = 0, r1 = 2,gains_denovo,col="red") ## Choose color
+kpPlotRegions(kp, r0 = 0, r1 = 0.8,gains_pol, col="blue") ## Choose color 
+kpPlotRegions(kp, r0 = 0, r1 = 0.8,gains_hs, col="green") ## Choose color 
 kpAddCytobandLabels(kp,cex=0.8)
 dev.off()

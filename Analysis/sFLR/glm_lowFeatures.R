@@ -1,5 +1,5 @@
 ## Logistic regression on L1 data: scalar predictors 
-setwd('~/Desktop/regression/')
+setwd('~/Google_Drive/L1/L1_Project/Analysis/sFLR/')
 # Load the transformed data
 # source("https://bioconductor.org/biocLite.R")
 # biocLite("IWTomics")
@@ -9,7 +9,8 @@ require(IWTomics)
 ####Here for comparisons 4,5 and 6, we also changed the comparisons' directions to L1pol vs denovo, L1hs vs denovo, L1pol vs L1hs
 
 for (r in 1:10){
-  setwd(paste("~/Desktop/regression/10_randoms/random",r,sep=''))
+  r=1#Since random 1 was selected in our analysis, here we only load random 1 for illustration purpose
+  setwd(paste("~/Google_Drive/L1/L1_Project/Analysis/sFLR/random",r,sep=''))
   load(file = paste("L1_lowFeatures_transformed_random",r,'.RData',sep=''))
   # Use the similar pipepline for selecting scalar predictors among high-res features, 
   # only here all the 7 low-res features are "scalar" 

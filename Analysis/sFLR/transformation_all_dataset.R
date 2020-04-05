@@ -1,4 +1,4 @@
-setwd('~/Desktop/transformation/with_alldata/')
+setwd('~/Google_Drive/l1/L1_Project/Analysis/sFLR/')
 library(IWTomics)
 require(dendextend)
 
@@ -265,7 +265,7 @@ regionsFeatures_smoothed@metadata$feature_datasets
 f<-as.vector(regionsFeatures_smoothed@metadata$feature_datasets[,1])
 shift_sum<-cbind(f,shift_table)
 shift_sum<-data.frame(shift_sum)
-write.table(shift_sum,file = "~/Desktop/transformation/with_alldata/shift_table.txt",sep="\t",quote=FALSE)
+write.table(shift_sum,file = "~/Google_Drive/l1/L1_Project/Analysis/sFLR/shift_table.txt",sep="\t",quote=FALSE)
 
 
 
@@ -288,7 +288,7 @@ write.table(shift_sum,file = "~/Desktop/transformation/with_alldata/shift_table.
 ###Note that feature 3 has negative values, need to be transformed seperately!!!!! Here only tested for features 1,2,4:7
 
 ## Transform the 7 low resolution features base on the original dataset without subsampling denovos
-setwd('~/Desktop/transformation/with_alldata/10_randoms/')
+setwd('~/Google_Drive/l1/L1_Project/Analysis/sFLR/')
 load('L1_low_resolution_autosomes.RData')
 library(nortest)
 
@@ -721,7 +721,7 @@ write.table(trans_summary_sw, file='low_resolution_swtest_transformation_summary
 #############################################
 ################# 10 Random Samples ######
 ## Create (denovo) subsamples for the 7 low resolution features 
-setwd('~/Desktop/transformation/with_alldata/10_randoms/')
+setwd('~/Google_Drive/l1/L1_Project/Analysis/sFLR/')
 #load('L1_low_resolution_autosomes.RData')
 
 # Check the transformation shift table, should be the same as above
@@ -729,9 +729,9 @@ trans
 
 #Transformation for each random sample
 for (r in 1:10){
-  #r=1
-  load('L1_low_resolution_autosomes.RData')
-  file=paste('L1_autosomes_results_smoothed_mean_', r, '.RData', sep="")
+  r=1#Since random 1 was selected in our analysis, here we only load random 1 for illustration purpose
+  #load('L1_low_resolution_autosomes.RData')
+  file=paste('~/Google_Drive/l1/L1_Project/Analysis/IWTomics/high_resolution/L1_autosomes_results_smoothed_mean_', r, '.RData', sep="")
   load(file)
   # result_mean@regions$L1denovo
   # regionsFeatures@regions$L1denovo

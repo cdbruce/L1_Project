@@ -1,0 +1,1 @@
+Feature	test1	test2	test3	test4	test5	test6Dis_Telo	na	n	n	n	n	naDis_Cent	na	n	na	n	n	naRep_Timing	n 	n	n	n	n	n Female_Recom_Rate	cor	cor	cor	cor	cor	corMale_Recom_Rate	cor	cor	cor	cor	cor	corAverage_Recom_Rate	na	na	na	na	na	naTelomere_Hexamer	n	n	n	n	n	na

@@ -1,0 +1,33 @@
+F,feature,feature_num,feature_names,significance,pseudoR2,,,feature,feature_num,feature_names,coefficient,significance,pseudoR2
+1,feature_1,1,H2AFZ,0.000535237,0.010683875,,1,lowfeature_1,1,Dis_Telo,1.03E-09,0.578102024,0.000133638
+8,feature_2,2,H3K27ac,3.44E-05,0.013807294,,2,lowfeature_2,2,Dis_Cent,8.50E-10,0.592774675,0.000123579
+12,feature_3,3,H4K20me1,0.012265557,0.008893081,,3,lowfeature_3,3,Rep_Timing,-0.93445222,0.000728646,0.004976245
+16,feature_4,4,H3K36me3,0.089211861,0.006173657,,4,lowfeature_4,4,Female_Recom_Rate,-0.120705092,0.00547108,0.003349909
+17,feature_5,5,H3K4me1,0.000842897,0.011209192,,5,lowfeature_5,5,Male_Recom_Rate,-0.080955875,0.047208854,0.001705535
+18,feature_9,9,H3K9ac,0.004914552,0.012398095,,6,lowfeature_6,6,Average_Recom_Rate,-0.007868702,0.853339525,1.48E-05
+2,feature_10,10,H3K9me3,0.004141743,0.004996301,,7,lowfeature_7,7,Telomere_Hexamer,-0.014276179,0.050537008,0.00165868
+3,feature_12,12,CTCF,0.000576492,0.01576528,,,,,,,,
+4,feature_13,13,DNase hypersensitive sites,5.83E-05,0.018078526,,,,,,,,
+5,feature_14,14,RNA Pol2,0.217229,0.003772464,,,,,,,,
+6,feature_17,17,Direct repeats,0.028063911,0.005826743,,,,,,,,
+7,feature_19,19,Mirror repeats,0.013890176,0.007163791,,,,,,,,
+9,feature_21,21,Most conserved element,0.242960077,0.002092582,,,,,,,,
+10,feature_26,26,Mononucleotides,3.79E-08,0.016204713,,,,,,,,
+11,feature_29,29,Alu,0.299044633,0.005343049,,,,,,,,
+13,feature_30,30,MIR,0.000342165,0.0085803,,,,,,,,
+14,feature_37,37,Replication origin,0.000849515,0.009161698,,,,,,,,
+15,feature_38,38,Sex-averaged recombination hotspots,0.1792655,0.005286571,,,,,,,,
+,,,,,,,,,,,,,
+,,,,,,,,,,,,,
+S,feature,feature_num,feature_names,coefficient,significance,pseudoR2,,,,,,,
+9,feature_6,6,H3K4me2,-0.559200537,0.000218697,0.005992858,,,,,,,
+10,feature_7,7,H3K4me3,-0.599025225,0.010740522,0.002837529,,,,,,,
+11,feature_8,8,H3K79me2,-0.104732501,0.392668012,0.00031641,,,,,,,
+1,feature_11,11,H3K27me3,-0.629091933,0.000221625,0.006260159,,,,,,,
+2,feature_18,18,Inverted repeats,0.636210746,0.112903301,0.001087992,,,,,,,
+3,feature_22,22,Exons,-0.097558018,0.023749923,0.00222807,,,,,,,
+4,feature_24,24,GC content,-1.955037418,0.00064617,0.005091886,,,,,,,
+5,feature_34,34,CpG islands,-0.085632114,0.018658467,0.002477864,,,,,,,
+6,feature_35,35,5-hydroxymethylcytosine,-0.089782005,0.003241582,0.003852565,,,,,,,
+7,feature_36,36,Sperm hypomethylation,-0.040743658,0.064917232,0.001485521,,,,,,,
+8,feature_40,40,hESC gene expression,-0.000868349,0.971562114,5.49E-07,,,,,,,

@@ -1,0 +1,42 @@
+F,feature,feature_num,feature_names,significance,pseudoR2,,,,feature,feature_num,feature_names,coefficient,significance,pseudoR2
+1,feature_10,10,H3K9me3,4.91E-06,0.008408412,,,1,lowfeature_1,1,Dis_Telo,8.28E-09,5.48E-06,0.008122602
+2,feature_11,11,H3K27me3,2.31E-08,0.091056773,,,2,lowfeature_2,2,Dis_Cent,-3.33E-09,0.022464167,0.002039473
+3,feature_17,17,Direct repeats,3.28E-06,0.019469789,,,3,lowfeature_3,3,Rep_Timing,-2.57383052,2.86E-27,0.048887371
+4,feature_18,18,Inverted repeats,4.03E-06,0.017291647,,,4,lowfeature_4,4,Female_Recom_Rate,-0.3022238,6.66E-13,0.020693202
+5,feature_19,19,Mirror repeats,4.14E-06,0.012384244,,,5,lowfeature_5,5,Male_Recom_Rate,-0.310764923,1.06E-14,0.024110004
+6,feature_20,20,Z DNA motifs,3.39E-06,0.020840154,,,6,lowfeature_6,6,Average_Recom_Rate,-0.139877073,0.000608405,0.004603095
+7,feature_22,22,Exons,2.52E-07,0.057084186,,,7,lowfeature_7,7,Telomere_Hexamer,-0.124131066,5.02E-59,0.131422559
+8,feature_26,26,Mononucleotides,4.41E-06,0.009172078,,,,,,,,,
+9,feature_27,27,Microsatellites di- tri- tetra-nucleotide,4.55E-06,0.005110145,,,,,,,,,
+10,feature_32,32,L1 target motifs,4.34E-06,0.009232742,,,,,,,,,
+11,feature_33,33,L2 and L3,1.87E-06,0.050400124,,,,,,,,,
+12,feature_34,34,CpG islands,1.52E-07,0.045093031,,,,,,,,,
+13,feature_36,36,Sperm hypomethylation,4.50E-06,0.004164659,,,,,,,,,
+14,feature_38,38,Sex-averaged recombination hotspots,3.92E-06,0.008960269,,,,,,,,,
+,,,,,,,,,,,,,,
+S,feature,feature_num,feature_names,coefficient,significance,pseudoR2,,,,,,,,
+1,feature_1,1,H2AFZ,0.289649037,0.12180297,0.000934735,,,,,,,,
+7,feature_2,2,H3K27ac,-6.948934409,3.77E-74,0.193092091,,,,,,,,
+12,feature_3,3,H4K20me1,-3.439987398,7.37E-61,0.145445779,,,,,,,,
+17,feature_4,4,H3K36me3,-2.971392642,4.51E-47,0.112012211,,,,,,,,
+21,feature_5,5,H3K4me1,-3.419666705,2.57E-82,0.213581248,,,,,,,,
+22,feature_6,6,H3K4me2,-3.391924403,1.07E-79,0.208341999,,,,,,,,
+23,feature_7,7,H3K4me3,-4.266981806,2.14E-60,0.144049517,,,,,,,,
+24,feature_8,8,H3K79me2,-1.559070169,4.32E-32,0.075395817,,,,,,,,
+25,feature_9,9,H3K9ac,-5.106362363,6.53E-86,0.225438055,,,,,,,,
+2,feature_12,12,CTCF,-3.658262861,7.38E-72,0.170525428,,,,,,,,
+3,feature_13,13,DNase hypersensitive sites,-2.119281036,1.06E-53,0.123141209,,,,,,,,
+4,feature_14,14,RNA Pol2,-0.552170213,6.35E-14,0.024316657,,,,,,,,
+5,feature_15,15,G Quadruplexes,-0.677291366,3.80E-24,0.047602704,,,,,,,,
+6,feature_16,16,A-phased repeats,2.684733852,2.94E-41,0.082185297,,,,,,,,
+8,feature_21,21,Most conserved element,-2.056460489,1.32E-71,0.169903161,,,,,,,,
+9,feature_23,23,Introns,-0.332309559,2.70E-37,0.067489955,,,,,,,,
+10,feature_24,24,GC content,-8.546414863,1.40E-58,0.129040518,,,,,,,,
+11,feature_29,29,Alu,-8.84195518,1.40E-25,0.053089672,,,,,,,,
+13,feature_30,30,MIR,-1.023242905,7.92E-51,0.110412658,,,,,,,,
+14,feature_31,31,LTR elements,0.40326469,6.78E-30,0.055087703,,,,,,,,
+15,feature_35,35,5-hydroxymethylcytosine,-0.394037861,2.66E-45,0.112944737,,,,,,,,
+16,feature_37,37,Replication origin,-0.371211905,8.74E-34,0.074266902,,,,,,,,
+18,feature_40,40,hESC gene expression,-0.342354309,3.36E-46,0.091364413,,,,,,,,
+19,feature_43,43,CHH Methylation,-2.736163828,0.015013525,0.00230868,,,,,,,,
+20,feature_44,44,CHG Methylation,-4.961655495,1.91E-05,0.007460213,,,,,,,,

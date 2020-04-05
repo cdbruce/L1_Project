@@ -6,7 +6,7 @@ require(fda.usc)
 # biocLite("IWTomics")
 require(IWTomics)
 
-setwd('~/Desktop/regression/10_randoms/')
+setwd('~/Google_Drive/l1/L1_Project/Analysis/sFLR/')
 
 # Select functional predictors by the localization table created based on the bosplots & IWT results
 localization_all<-read.table("localization_table.txt",header=TRUE)
@@ -31,8 +31,8 @@ func_6<-as.vector(localization_all$test6)
 
 ####Here for comparisons 4,5 and 6, we also changed the comparisons' directions to L1pol vs denovo, L1hs vs denovo, L1pol vs L1hs
 for (r in 1:10){
-  #r=1
-  setwd(paste("~/Desktop/regression/10_randoms/random",r,sep=''))
+  r=1#Since random 1 was selected in our analysis, here we only load random 1 for illustration purpose
+  setwd(paste("~/Google_Drive/l1/L1_Project/Analysis/sFLR/random",r,sep=''))
   load(file = paste("L1_transformed_random_",r,'.RData',sep=''))
   #result_mean
   # test<-result_mean@features$H2AFZ_signal[[1]]
@@ -511,144 +511,4 @@ for (r in 1:10){
   
 }
 
-
-
-
 ###DONE######
-
-
-
-
-
-# 
-# 
-# 
-# ###############
-# ## Check regression results individually for the random samples (1 & 6)
-# r=1
-# setwd(paste("~/Desktop/regression/10_randoms/random",r,sep=''))
-# load(file = paste("L1_transformed_random_",r,'.RData',sep=''))
-# ## comparison 1
-# comp1_func
-# comp1_func_logit_sum
-# #H3K4me3(activation)
-# i=comp1_func[5]
-# #CpG methylation
-# #i=comp1_func[23]
-# l1<-result_mean@features[[i]][[1]]
-# ct<-result_mean@features[[i]][[4]]
-# dim(l1)
-# dim(ct)
-# # Convert  from class fda to fdata
-# x<-rbind(t(l1),t(ct))
-# # bsp1 <- create.bspline.basis(c(1:100),10)
-# # fd1 <- Data2fd(1:100,y=t(y),basisobj=bsp1)
-# # fdataobj=fdata(fd1)
-# x_f<-fdata(x)
-# #feature1<-x_f$data
-# y<-c(rep(1,length(l1[1,])),rep(0,length(ct[1,])))
-# dataf=as.data.frame(y)
-# x=paste('feature',i,sep='')
-# tdata=list("df"=dataf,'x'=x_f)
-# #x_f[["argvals"]]=x_f[["argvals"]]-50.5
-# tt=x_f[["argvals"]]
-# # define the same basis for both x and b
-# # Instead of defining nbasis, here to define the number of nodes: norder=1 & breaks=21 
-# basis_common=create.bspline.basis(rangeval = range(tt),norder=1,breaks=seq(from =0.5,to=100.5, length.out=21))
-# basis.x=list("x"=basis_common)
-# basis.b=list("x"=basis_common)
-# f=y~x
-# res=fregre.glm(f,family=binomial(link=logit),data=tdata,basis.x=basis.x,basis.b=basis.b)
-# summary(res)
-# 
-# 
-# ###Coparison 3
-# #comp3_func
-# #H3K4me3(activation)
-# i=comp3_func[5]
-# #CpG methylation
-# #i=comp3_func[23]
-# l1<-result_mean@features[[i]][[3]]
-# ct<-result_mean@features[[i]][[4]]
-# dim(l1)
-# dim(ct)
-# # Convert  from class fda to fdata
-# x<-rbind(t(l1),t(ct))
-# # bsp1 <- create.bspline.basis(c(1:100),10)
-# # fd1 <- Data2fd(1:100,y=t(y),basisobj=bsp1)
-# # fdataobj=fdata(fd1)
-# x_f<-fdata(x)
-# #feature1<-x_f$data
-# y<-c(rep(1,length(l1[1,])),rep(0,length(ct[1,])))
-# dataf=as.data.frame(y)
-# x=paste('feature',i,sep='')
-# tdata=list("df"=dataf,'x'=x_f)
-# #x_f[["argvals"]]=x_f[["argvals"]]-50.5
-# tt=x_f[["argvals"]]
-# # define the same basis for both x and b
-# # Instead of defining nbasis, here to define the number of nodes: norder=1 & breaks=21 
-# basis_common=create.bspline.basis(rangeval = range(tt),norder=1,breaks=seq(from =0.5,to=100.5, length.out=21))
-# basis.x=list("x"=basis_common)
-# basis.b=list("x"=basis_common)
-# f=y~x
-# res=fregre.glm(f,family=binomial(link=logit),data=tdata,basis.x=basis.x,basis.b=basis.b)
-# summary(res)
-# # 
-# # 
-# # 
-# #Number of functional predictors where significances were not captured by regression (by the cut-off: smallest pval=0.05)
-# length(as.vector(which(as.vector(comp1_func_logit_sum$significance)>0.1)))
-# length(as.vector(which(as.vector(comp2_func_logit_sum$significance)>0.1)))
-# length(as.vector(which(as.vector(comp3_func_logit_sum$significance)>0.1)))
-# length(as.vector(which(as.vector(comp4_func_logit_sum$significance)>0.1)))
-# length(as.vector(which(as.vector(comp5_func_logit_sum$significance)>0.1)))
-# length(as.vector(which(as.vector(comp6_func_logit_sum$significance)>0.5)))
-# # 
-# # length(as.vector(which(as.vector(comp5_func_logit_sum$significance)<0.05)))
-
-
-# ## Create functional data object
-# data(phoneme)
-# mlearn<-phoneme$learn[1:4,1:150]
-# # Center curves
-# fdata.c=fdata.cen(mlearn)$Xcen
-# par(mfrow=c(2,1))
-# plot.fdata(mlearn,type="l")
-# plot.fdata(fdata.c,type="l")
-# 
-# # Convert  from class fda to fdata
-# bsp1 <- create.bspline.basis(c(1,150),21)
-# fd1 <- Data2fd(1:150,y=t(mlearn$data),basisobj=bsp1)
-# fdataobj=fdata(fd1)
-# 
-# # Convert  from class fds, fts or sfts to fdata
-# #require(fds)
-# #a=fds(x = 1:20, y = Simulationdata$y, xname = "x", 
-# # yname = "Simulated value")
-# #b=fts(x = 15:49, y = Australiasmoothfertility$y, xname = "Age",
-# #    yname = "Fertility rate")
-# #c=sfts(ts(as.numeric(ElNino$y), frequency = 12), xname = "Month",
-# #yname = "Sea surface temperature")
-# #class(a);class(b);class(c)
-# #fdataobj=fdata(b)
-# 
-# data(tecator)
-# x=tecator$absorp.fdata
-# y=tecator$y$Fat
-# tt=x[["argvals"]]
-# dataf=as.data.frame(tecator$y)
-# 
-# nbasis.x=11 # define the same basis for both x and b
-# nbasis.b=7
-# basis1=create.bspline.basis(rangeval=range(tt),nbasis=nbasis.x)# Instead, define the number of nodes instead, order 1, 21 knots 
-# basis2=create.bspline.basis(rangeval=range(tt),nbasis=nbasis.b)
-# 
-# f=Fat~Protein+x
-# basis.x=list("x"=basis1)
-# basis.b=list("x"=basis2)
-# ldata=list("df"=dataf,"x"=x)
-# res=fregre.glm(f,family=gaussian(),data=ldata,basis.x=basis.x,
-#                basis.b=basis.b)
-# summary(res)
-
-# Load the transformed data

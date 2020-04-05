@@ -1,0 +1,2 @@
+load("/Users/Bruce/Desktop/regression/10_randoms/random1/scalar_noLowres_individual_regression_random1.RData")
+load("/Users/Bruce/Desktop/regression/10_randoms/random1/low_features_individual_regression_random1.RData")

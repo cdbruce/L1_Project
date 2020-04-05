@@ -1,0 +1,32 @@
+,feature,feature_num,feature_names,significance,pseudoR2,,,feature,feature_num,feature_names,significance,pseudoR2,DE(%)
+1,feature_1,1,H2AFZ,0.0001099,0.00536313,,1,lowfeature_1,1,Dis_Telo,0.156575204,0.000713186,0.07
+6,feature_2,2,H3K27ac,0.011329729,0.026867303,,2,lowfeature_2,2,Dis_Cent,0.830613994,1.62E-05,0
+6,feature_3,3,H4K20me1,8.25E-09,0.012120325,,3,lowfeature_3,3,Rep_Timing,0.002296884,0.003311089,0.33
+15,feature_4,4,H3K36me3,0.020530752,0.014826982,,4,lowfeature_4,4,Female_Recom_Rate,0.000151662,0.005129546,0.51
+17,feature_5,5,H3K4me1,0.05953762,0.0419751,,5,lowfeature_5,5,Male_Recom_Rate,8.80E-10,0.013620469,1.36
+18,feature_6,6,H3K4me2,0.005421068,0.025144375,,6,lowfeature_6,6,Average_Recom_Rate,0.011143193,0.002293399,0.23
+19,feature_7,7,H3K4me3,0.009168125,0.014843525,,7,lowfeature_7,7,Telomere_Hexamer,2.81E-52,0.099602295,9.96
+20,feature_9,9,H3K9ac,0.049480284,0.023816861,,,,,,,,
+1,feature_11,11,H3K27me3,0.176723997,0.007574651,,,,,,,,
+2,feature_13,13,DNase hypersensitive sites,0.008973138,0.01002374,,,,,,,,
+3,feature_14,14,RNA Pol2,0.143487921,0.002284995,,,,,,,,
+4,feature_15,15,G Quadruplexes,0.035882117,0.011584455,,,,,,,,
+2,feature_17,17,Direct repeats,0.000484676,0.004370131,,,,,,,,
+5,feature_19,19,Mirror repeats,0.004032922,0.021836199,,,,,,,,
+3,feature_21,21,Most conserved element,3.36E-47,0.087405402,,,,,,,,
+7,feature_22,22,Exons,0.004696391,0.005416444,,,,,,,,
+4,feature_23,23,Introns,1.59E-17,0.026508436,,,,,,,,
+8,feature_24,24,GC content,0.000166372,0.012284259,,,,,,,,
+9,feature_26,26,Mononucleotides,0.060954421,0.001636798,,,,,,,,
+5,feature_27,27,Microsatellites di- tri- tetra-nucleotide,0.013683519,0.002165671,,,,,,,,
+10,feature_29,29,Alu,0.067935371,0.008103136,,,,,,,,
+7,feature_30,30,MIR,5.16E-37,0.06556492,,,,,,,,
+8,feature_31,31,LTR elements,1.51E-05,0.006715673,,,,,,,,
+9,feature_32,32,L1 target motifs,3.91E-27,0.044347447,,,,,,,,
+11,feature_33,33,L2 and L3,0.008893021,0.049350878,,,,,,,,
+12,feature_34,34,CpG islands,1.24E-08,0.025444156,,,,,,,,
+13,feature_36,36,Sperm hypomethylation,1.27E-08,0.020367696,,,,,,,,
+14,feature_37,37,Replication origin,0.052133433,0.004544567,,,,,,,,
+10,feature_38,38,Sex-averaged recombination hotspots,0.214191351,0.000548131,,,,,,,,
+11,feature_40,40,hESC gene expression,9.23E-09,0.011900394,,,,,,,,
+16,feature_45,45,CPG Methylation,0.029741193,0.002723532,,,,,,,,

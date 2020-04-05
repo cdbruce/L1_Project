@@ -1,0 +1,41 @@
+DNase_DHS_signal	DNase hypersensitive sites
+RNA_PolII	RNA Pol2
+CTCF_signal	CTCF
+H2AFZ_signal	H2AFZ
+H3K27ac_signal	H3K27ac
+H4K20me1_signal	H4K20me1
+H3K36me3_signal	H3K36me3
+H3K4me1_signal	H3K4me1
+H3K4me2_signal	H3K4me2
+H3K4me3_signal	H3K4me3
+H3K79me2_signal	H3K79me2
+H3K9ac_signal	H3K9ac
+H3K9me3_signal	H3K9me3
+H3K27me3_signal	H3K27me3
+5hMc	5-hydroxymethylcytosine
+Sperm_hypometh	Sperm hypomethylation
+chh_meth	CHH Methylation
+chg_meth	CHG Methylation
+cpg_meth	CPG Methylation
+Most_Conserved	Most conserved element
+CpG_Islands	CpG islands
+Exons	Exons
+Introns	Introns
+GC_Content	GC content
+Quadruplex	G Quadruplexes
+A_Phased	A-phased repeats
+Direct_Repeats	Direct repeats
+Inverted_Repeats	Inverted repeats
+Mirror_Repeats	Mirror repeats
+Z_DNA	Z DNA motifs
+Mononucleotide	Mononucleotides
+Morethan1_nuc	Microsatellites di- tri- tetra-nucleotide
+DNA_Transposons	DNA transposons
+SINE_Alu	Alu
+SINE_MIR	MIR
+LTR_Elements	LTR elements
+L1_Targets	L1 target motifs
+LINE_L2&L3	L2 and L3
+Gene_Expression	hESC gene expression
+Rep_origin	Replication origin
+Recombination_Hot	Sex-averaged recombination hotspots

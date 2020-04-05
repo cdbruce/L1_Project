@@ -1,11 +1,11 @@
-setwd("C:/Users/marzi/Google Drive/L1/different_flanking_overlap/distance NEW all elements/")
+setwd("~/Google_Drive/L1/L1_Project/Analysis/Distance_distribution/")
 
 require(GenomicRanges)
 
 
 
 # DE NOVO
-L1denovo  <- read.table('../../L1_Datasets/Good/L1denovo_BWA_17037_reads.bed', header = FALSE, sep = '\t')
+L1denovo  <- read.table('~/Google_Drive/L1/L1_Project/Datasets/L1_genomic_coordinates/L1denovo_BWA_17037_reads.bed', header = FALSE, sep = '\t')
 names(L1denovo) <- c('chr', 'start', 'end', 'strand', 'barcode', 'site', 'annot')
 L1denovo$start[L1denovo$strand == '+'] <- L1denovo$end[L1denovo$strand == '+']
 L1denovo$end[L1denovo$strand == '-'] <- L1denovo$start[L1denovo$strand == '-']
@@ -13,13 +13,13 @@ L1denovo <- makeGRangesFromDataFrame(L1denovo, starts.in.df.are.0based = TRUE, k
 L1denovo <- sort(L1denovo, ignore.strand = TRUE)
 
 # POLYMORPHIC
-L1Pol <- read.table('../../L1_Datasets/Good/L1Pol_Ewing_LiftedFromHG18.interval', header = FALSE, sep = '\t')
+L1Pol <- read.table('~/Google_Drive/L1/L1_Project/Datasets/L1_genomic_coordinates/L1Pol_Ewing_LiftedFromHG18.interval', header = FALSE, sep = '\t')
 names(L1Pol) <- c('chr', 'start', 'end', 'strand', 'annot')
 L1Pol <- makeGRangesFromDataFrame(L1Pol, starts.in.df.are.0based = TRUE, keep.extra.columns = TRUE)
 L1Pol <- sort(L1Pol, ignore.strand = TRUE)
 
 # HUMAN SPECIFIC
-L1HS <- read.table('../../L1_Datasets/Good/L1HS_clean_sorted_1205.bed', header = FALSE, sep = '\t')
+L1HS <- read.table('~/Google_Drive/L1/L1_Project/Datasets/L1_genomic_coordinates/L1HS_clean_sorted_1205.bed', header = FALSE, sep = '\t')
 names(L1HS) <- c('chr', 'start', 'end', 'strand', 'annot')
 L1HS <- makeGRangesFromDataFrame(L1HS, starts.in.df.are.0based = TRUE, keep.extra.columns = TRUE)
 L1HS <- sort(L1HS, ignore.strand = TRUE)
@@ -106,12 +106,13 @@ shuffleBed <- function(x, genome_file = NULL, excl_file = NULL, chrom = FALSE, m
   unlink(c(bed_file, shuffle_file))
   shuffled
 }
+decdf <- function(x, a, b)  ecdf(a)(x) - ecdf(b)(x)
 
 # Denovo not same chromosome
 set.seed(2017)
 shuffled <- shuffleBed(L1denovo, genome_file = 'chromsizes_hg19_noY.tab', excl_file = 'gaps.bed', chrom = FALSE)
 shuffled <- sort(shuffled, ignore.strand= TRUE)
-dist_denovo_shuffled <- (start(L1denovo_shuffled)[-1]-1)-end(L1denovo_shuffled)[-length(L1denovo_shuffled)]
+dist_denovo_shuffled <- (start(shuffled)[-1]-1)-end(shuffled)[-length(shuffled)]
 dist_denovo_shuffled <- dist_denovo_shuffled[dist_denovo_shuffled>=0]
 require(Matching)
 p.value=ks.boot(log(dist_denovo+0.01),log(dist_denovo_shuffled+0.01))$ks$p.value
@@ -150,7 +151,7 @@ dev.off()
 set.seed(2018)
 shuffled <- shuffleBed(L1Pol, genome_file = 'chromsizes_hg19_noY.tab', excl_file = 'gaps.bed', chrom = FALSE)
 shuffled <- sort(shuffled, ignore.strand= TRUE)
-dist_Pol_shuffled <- (start(L1Pol_shuffled)[-1]-1)-end(L1Pol_shuffled)[-length(L1Pol_shuffled)]
+dist_Pol_shuffled <- (start(shuffled)[-1]-1)-end(shuffled)[-length(shuffled)]
 dist_Pol_shuffled <- dist_Pol_shuffled[dist_Pol_shuffled>=0]
 require(Matching)
 p.value=ks.boot(log(dist_Pol+0.01),log(dist_Pol_shuffled+0.01))$ks$p.value
@@ -189,7 +190,7 @@ dev.off()
 set.seed(2018)
 shuffled <- shuffleBed(L1HS, genome_file = 'chromsizes_hg19_noY.tab', excl_file = 'gaps.bed', chrom = FALSE)
 shuffled <- sort(shuffled, ignore.strand= TRUE)
-dist_HS_shuffled <- (start(L1HS_shuffled)[-1]-1)-end(L1HS_shuffled)[-length(L1HS_shuffled)]
+dist_HS_shuffled <- (start(shuffled)[-1]-1)-end(shuffled)[-length(shuffled)]
 dist_HS_shuffled <- dist_HS_shuffled[dist_HS_shuffled>=0]
 require(Matching)
 p.value=ks.boot(log(dist_HS+0.01),log(dist_HS_shuffled+0.01))$ks$p.value

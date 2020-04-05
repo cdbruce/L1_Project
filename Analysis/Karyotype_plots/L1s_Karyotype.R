@@ -1,13 +1,13 @@
 ##Karyotype plots for L1s from three datasets
 ##Backup scripts for jupytor notebook (L1s_Karyotype_SizeCorrelation.ipynb)
 
-setwd("~/Google_Drive/L1/L1_Project/Analysis_Pipeline/Exploratory_Analysis/")
+setwd("~/Google_Drive/L1/L1_Project/Analysis/Karyotype_plots/")
 
 library("rtracklayer")
 library(karyoploteR)
 library(GenomicRanges)
 
-#Load the data for de novo L1s
+#Load the data for de novo L1s  
 #L1_denovo<-read.table("L1denovo_BWA_merged4_undecidable_100kb_no_gaps_no_blacklisted.interval",sep="\t")[,1:3]
 L1_denovo<-read.table("L1denovo_BWA_17037_for_karyotype.bed",sep="\t")[,1:3]
 names(L1_denovo)=c('chr','start','end')

@@ -1,4 +1,4 @@
-In general, there are 10 folders (random 1-10) and 4 Rscript files:
+There are 10 folders (random 1-10) and 4 Rscript files:
 transformation_all_dataset.R
 func_log_regression_individual.R
 glm_scalar_no_lowFeatures.R
